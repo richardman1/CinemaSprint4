@@ -1,0 +1,123 @@
+﻿@using IVH7_Cinema.Domain.Entities
+@using IVH7_Cinema.WebUI.Website.Models
+@model ObjectViewModel
+@{
+    ViewBag.Title = "LostAndFound";
+}
+<button type="button" class="btn btn-lg btn-danger" onclick="location.href='@Url.Action("Logout", "Account")'">Afmelden</button>
+<h2>Verloren voorwerpen</h2>
+
+<div class="panel panel-default">
+    <div class="panel-heading">Aanmelden verloren object</div>
+    <div class="panel-body">
+        @using (Html.BeginForm("NewLostObject", "Account", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.AntiForgeryToken()
+            
+            <div class="form-group">
+            <label class="control-label col-md-2" style="float: left;">Naam voorwerp: </label>
+            <div class="col-md-10" style="align-items: center">
+                @Html.EditorFor(model => model.lostobject.Name, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.lostobject.Name, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2" style="float: left;">Plaats voorwerp: </label>
+            <div class="col-md-10" style="">
+                @Html.EditorFor(model => model.lostobject.Foundplace, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.lostobject.Foundplace, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2" style="float: left;">Datum voorwerp: </label>
+            <div class="col-md-10">
+                    @Html.EditorFor(model => model.lostobject.DateTime, new { htmlAttributes = new { @class = "form-control"} })
+                    @Html.ValidationMessageFor(model => model.lostobject.DateTime, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2" style="float: left;">Emailadres eigenaar: </label>
+            <div class="col-md-10" style="">
+                @Html.EditorFor(model => model.lostobject.EmailAddress, new { htmlAttributes = new { @class = "form-controll" } })
+                @Html.ValidationMessageFor(model => model.lostobject.EmailAddress, "", new { @class = "text-danger" })        
+            </div>
+        </div>
+
+    <div class="form-group">
+        <label class="control-label col-md-2" style="float: left;">Naam vinder: </label>
+        <div class="col-md-10" style="">
+            @Html.EditorFor(model => model.lostobject.FinderName, new { htmlAttributes = new { @class = "form-controll" } })
+            @Html.ValidationMessageFor(model => model.lostobject.FinderName, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-md-2" style="float: left;">Adres vinder: </label>
+        <div class="col-md-10" style="">
+            @Html.EditorFor(model => model.lostobject.FinderAddress, new { htmlAttributes = new { @class = "form-controll" } })
+            @Html.ValidationMessageFor(model => model.lostobject.FinderAddress, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-md-2" style="float: left;">Email vinder: </label>
+        <div class="col-md-10" style="">
+            @Html.EditorFor(model => model.lostobject.FinderEmail, new { htmlAttributes = new { @class = "form-controll" } })
+            @Html.ValidationMessageFor(model => model.lostobject.FinderEmail, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Toevoegen gevonden object" class="btn btn-default" />
+            </div>
+        </div>
+        } 
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        Zoeken door verloren objecten</div>
+        <div class="panel-body">
+            <table id="table_id" class="display">
+                <thead>
+                    <tr>
+                        <th>Naam voorwerp</th>
+                        <th>Email eigenaar</th>
+                        <th>Datum voorwerp gevonden</th>
+                        <th>Gevonden plek</th>
+                        <th>Opgehaald door eigenaar</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach(LostObject l in Model.objects){
+                        <tr>
+                            <td>@Html.ActionLink(l.Name, "ObjectSummary", l)</td>
+                            <td>@Html.ActionLink(l.EmailAddress, "ObjectSummary", l)</td>
+                            <td>@Html.ActionLink(l.DateTime.Date.ToString(), "ObjectSummary", l)</td>
+                            <td>@Html.ActionLink(l.Foundplace, "ObjectSummary", l)</td>
+                            @if(l.PickedUp.Equals(false)){
+                            <td>Nee</td>
+                            }
+                            else
+                            {
+                                <td>Ja</td>
+                            }
+                        </tr>
+                    }
+
+                </tbody>
+            </table>
+            
+        </div>
+    </div><button type="button" class="btn btn-lg btn-danger" onclick="location.href='@Url.Action("Index", "Account")'">Terug naar home</button>
+<script>
+    $(document).ready(function () {
+        $('#table_id').DataTable();
+    });
+</script>

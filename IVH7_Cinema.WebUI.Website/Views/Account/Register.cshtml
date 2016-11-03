@@ -1,0 +1,33 @@
+﻿@using IVH7_Cinema.WebUI.Website.Models
+@model Register
+@{
+    ViewBag.Title = "Register";
+    List<SelectListItem> rollen = new List<SelectListItem>(){
+    new SelectListItem(){
+    Text="manager", Value="manager"
+},
+new SelectListItem(){
+    Text="back-office", Value="back-office"
+},
+new SelectListItem(){
+    Text="kassa", Value="kassa"
+}
+};
+}
+<h2>Registreer uw account</h2>
+
+<div>
+    @using (@Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary()
+        <label>Vul uw gebruikersnaam in:</label>
+        @Html.TextBoxFor(m => m.Username, new { @class = "form-control" })
+        <label>Vul uw wachtwoord in</label>
+        @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+
+        <label>Rol</label>
+        @Html.DropDownList("role", rollen, "Kies een functie");
+        <button class="btn btn-primary">Registreer</button>
+    }
+</div>

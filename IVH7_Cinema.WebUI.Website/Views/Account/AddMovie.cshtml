@@ -1,0 +1,190 @@
+﻿@model IVH7_Cinema.Domain.Entities.Movie
+@using IVH7_Cinema.Domain.Entities
+@using Microsoft.Web.Helpers
+@{
+    ViewBag.Title = "Film toevoegen";
+   
+}
+<script type="text/javascript" src="~/scripts/jquery-2.1.3.min.js"></script>
+<button type="button" class="btn btn-lg btn-danger" onclick="location.href='@Url.Action("Logout", "Account")'">Afmelden</button>
+<h2>Voeg een film toe</h2>
+
+@using (Html.BeginForm("AddMovie", "Account", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>Movie</h4>
+        Voeg hier een film toe door de gevraagde velden in te vullen
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            <label class="control-label col-md-2" style="float: left;">Titel: </label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2" style="float: left;">Beschrijving: </label>
+            <div class="col-md-10">
+                @Html.TextAreaFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2" style="float: left;">Beschrijving Engels: </label>
+            <div class="col-md-10">
+                @Html.TextAreaFor(model => model.DescriptionEN, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.DescriptionEN, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        
+
+        <div class="form-group">
+            <label class="control-label col-md-2" style="float: left;">Regisseur: </label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Director, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Director, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2" style="float: left;">Imdb link: </label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ImdbURL, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.ImdbURL, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2" style="float: left;">Imdb rating: </label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ImdbRating, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.ImdbRating, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2" style="float: left;">Trailer link: </label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.TrailerURL, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.TrailerURL, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2" style="float: left;">Poster afbeelding: </label>
+            <input type="file" name="File" id="File" />
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2" style="float: left;">Banner afbeelding: </label>
+            <div class="col-md-10">
+               <input type="file" name="File2" id="File2" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2" style="float: left;">Filmduur: </label>
+            <div class="col-md-10" style="align-items: center">
+                @Html.EditorFor(model => model.Duration, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Duration, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2" style="float: left;">Première datum: </label>
+            <div class="col-md-10" style="">
+                @Html.EditorFor(model => model.ReleaseDate, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.ReleaseDate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2" style="float: left;">3D-film: </label>
+            <div class="col-md-10">
+                <div class="checkbox ">
+                    @Html.EditorFor(model => model.Is3DAvailable)
+                    @Html.ValidationMessageFor(model => model.Is3DAvailable, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2" style="float: left;">Genres: </label>
+            <div class="col-md-10">
+                <div class="genres">
+                    <input class="form-control" id="Genre_GenreName" name="Genre.GenreName" type="text" value="" />
+                    <input class="form-control" id="Genre_GenreName" name="Genre.GenreName" type="text" value="" />
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2" style="float: left;">Talen: </label>
+            <div class="col-md-10">
+                <div class="languages">
+                    <input class="form-control" id="Language_LanguageName" name="Language.LanguageName" type="text" value="" />
+                    <input class="form-control" id="Language_LanguageName" name="Language.LanguageName" type="text" value="" />
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2" style="float: left;">Bioscopen:  </label>
+            <div class="col-md-10">
+                <div class="cinemas">
+                    <input class="form-control" id="Cinema_CinemaName" name="Cinema.CinemaName" type="text" value="" />
+                    <input class="form-control" id="Cinema_CinemaName" name="Cinema.CinemaName" type="text" value="" />
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2" style="float: left;">Kijkwijzer: </label>
+            <div class="col-md-10">
+                <div class="ratings">
+                    <input class="form-control" id="Rating_RatingName" name="Rating.RatingName" type="text" value="" />
+                    <input class="form-control" id="Rating_RatingName" name="Rating.RatingName" type="text" value="" />
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Voeg toe" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<button type="button" class="btn btn-lg btn-danger" onclick="location.href='@Url.Action("Index", "Account")'">Terug naar home</button>
+
+
+<script type="text/javascript">
+    $('.genres').on('keypress click', 'input:last-of-type', function (e) {
+        $(this).after('<input class="form-control" id="Genre_GenreName" name="Genre.GenreName" type="text" value="" />')
+    });
+</script>
+
+<script type="text/javascript">
+    $('.cinemas').on('keypress click', 'input:last-of-type', function (e) {
+        $(this).after('<input class="form-control" id="Cinema_CinemaName" name="Cinema.CinemaName" type="text" value="" />')
+    });
+</script>
+
+<script type="text/javascript">
+    $('.languages').on('keypress click', 'input:last-of-type', function (e) {
+        $(this).after('<input class="form-control" id="Language_LanguageName" name="Language.LanguageName" type="text" value="" />')
+    });
+</script>
+
+<script type="text/javascript">
+    $('.ratings').on('keypress click', 'input:last-of-type', function (e) {
+        $(this).after('<input class="form-control" id="Rating_RatingName" name="Rating.RatingName" type="text" value="" />')
+    });
+</script>

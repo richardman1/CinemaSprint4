@@ -1,0 +1,75 @@
+﻿@model IVH7_Cinema.WebUI.Website.Models.ReviewResults
+
+@{
+    ViewBag.Title = "Enquete resultaten";
+}
+<button type="button" class="btn btn-lg btn-danger" onclick="location.href='@Url.Action("Logout", "Account")'">Afmelden</button>
+<h2>Enquete resultaten</h2>
+<hr />
+<div>
+    <dl class="dl-horizontal">
+        <dt>
+            Algemeen:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GeneralAverage)
+        </dd>
+        <dt>
+            Werknemers:
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.EmployeeAverage)
+        </dd>
+        <dt>
+            Filmaanbod:
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.FilmsAverage)
+        </dd>
+        <dt>
+            Hygiene:
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.HygieneAverage)
+        </dd>
+        <dt>
+            Zalen:
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ScreenAverage)
+        </dd>
+        <dt>
+            Parkeren:
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ParkingAverage)
+        </dd>
+        <dt>
+            Website:
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.SiteAverage)
+        </dd>
+        <dt>
+            Horeca:
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.FoodAverage)
+        </dd>
+        <dt>
+            Prijzen:
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.PriceAverage)
+        </dd>
+        <dt>
+            Gebouw:
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.BuildingAverage)
+        </dd>
+    </dl>
+
+    <button type="button" id="cancel" class="btn btn-lg btn-success" onclick="location.href='@Url.Action("Index", "Account")'">Terug naar inlogscherm</button>
+</div>

@@ -1,0 +1,19 @@
+﻿@using IVH7_Cinema.WebUI.Website.Models
+@model Login
+@{
+    ViewBag.Title = "Login";
+}
+
+<h2>Vul uw gegevens in alstublieft</h2>
+<div>
+    @using (@Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary()
+        <label>Vul uw gebruikersnaam in:</label>
+        @Html.TextBoxFor(m => m.Username, new { @class="form-control"})
+        <label>Vul uw wachtwoord in</label>
+        @Html.PasswordFor(m => m.Password, new { @class="form-control"})
+        <button class="btn btn-primary">Login</button>
+    }
+</div>

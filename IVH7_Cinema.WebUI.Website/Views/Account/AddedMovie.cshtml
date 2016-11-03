@@ -1,0 +1,118 @@
+﻿@model IVH7_Cinema.Domain.Entities.Movie
+
+@{
+    ViewBag.Title = "AddedMovie";
+}
+<script src="~/Scripts/modernizr-2.8.3.js"></script>
+<script src="~/Scripts/jquery-2.1.3.min.js"></script>
+<script src="~/Scripts/bootstrap.min.js"></script>
+<script src="~/Scripts/index.js"></script>
+<script src="~/Scripts/payment.js"></script>
+<script src="~/Scripts/movie.js"></script>
+<script src="~/Scripts/order.js"></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+<h2>AddedMovie</h2>
+
+<div class="movie-banner" style="background-image:url('../Content/MovieBanners/@Model.BannerURL')">
+    <button class="movie-trailer-button" @if (System.Threading.Thread.CurrentThread.CurrentCulture.ToString().Equals("en-GB")) { @: style="background: url('../Content/Images/watch-trailerEN.png') no-repeat scroll center 0 rgba(0, 0, 0, 0);"
+                            }></button>
+    <div class="movie-trailer" style="display: inline-block; display: none;">
+        <iframe src="@(Model.TrailerURL)imdb/embed?autoplay=false&width=854" width="854" height="480" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true" frameborder="no" scrolling="no"></iframe>
+    </div>
+    <div class="movie-title-box">
+        <span class="movie-title">@Model.Title</span>
+    </div>
+</div>
+
+<div class="container body-content" style="padding: 0; background-color: rgba(255,255,255,.7);">
+    <div class="section group">
+        <div class="col span_2_of_3">
+            <img src="~/Content/MovieCovers/@Model.ImageURL" style="float:left; width: 150px; padding-right: 20px;" />
+            @if (System.Threading.Thread.CurrentThread.CurrentCulture.ToString().Equals("nl-NL"))
+            {
+                @Model.Description
+            }
+            @if (System.Threading.Thread.CurrentThread.CurrentCulture.ToString().Equals("en-GB"))
+            {
+                @Model.DescriptionEN
+            }
+
+        </div>
+        <div class="col span_1_of_3">
+            <h2>@Resources.MovieSpecs</h2>
+            <span class="movie-details-span">
+                @Resources.MovieGenre:
+                @{
+                    int i = 0;
+                    int count = Model.Genres.Count;
+                    foreach (var g in Model.Genres)
+                    {
+                        i++;
+                        if (i != count)
+                        {
+                            @g.Name@:,
+                            }
+                        else
+                        {
+                            @g.Name
+                        }
+                    }
+                }
+            </span>
+            <span class="movie-details-span">@Resources.MovieDuration: @Model.Duration minuten</span>
+            <span class="movie-details-span">@Resources.MovieDirector: @Model.Director</span>
+            <span class="movie-details-span">
+                @Resources.MovieLanguage:
+                @{
+                    int i2 = 0;
+                    int count2 = Model.Languages.Count;
+                    foreach (var l in Model.Languages)
+                    {
+                        i2++;
+                        if (i2 != count2)
+                        {
+                            @l.LanguageName@:,
+                                                        }
+                        else
+                        {
+                            @l.LanguageName
+                        }
+                    }
+                }
+            </span>
+            <span class="movie-details-span">@Resources.MovieRating: <a href="@Model.ImdbURL">@Model.ImdbRating</a></span>
+            <span class="movie-details-span">
+                @Resources.MovieClassification:
+                @{
+                    int i3 = 0;
+                    int count3 = Model.Ratings.Count;
+                    foreach (var r in Model.Ratings)
+                    {
+                        i3++;
+                        if (i3 != count3)
+                        {
+                            <img style="width: 25px;" src="~/Content/Images/@r.ImageUrl" />
+                        }
+                        else
+                        {
+                            <img style="width: 25px;" src="~/Content/Images/@r.ImageUrl" />
+                        }
+                    }
+                }
+
+
+            </span>
+            <span class="movie-details-span"><a href="@Url.Action("ReviewsPerMovie", "Account", new { MovieID = Model.MovieID })">Bekijk hier de beoordelingen van andere bezoekers!</a></span>
+        </div>
+    </div>
+
+    <hr />
+
+    Er zijn nog geen voorstellingen voor deze film!
+
+</div>
+
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/bootstrap.min.js"></script>

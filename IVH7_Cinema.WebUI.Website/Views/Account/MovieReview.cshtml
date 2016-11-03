@@ -1,0 +1,59 @@
+﻿@model IVH7_Cinema.WebUI.Website.Models.MovieReviewModel
+@using IVH7_Cinema.Domain.Entities;
+@{
+    ViewBag.Title = "Film review";
+}
+
+@if (TempData["ReviewFailMessage"] != null)
+{
+    <p class="alert alert-danger" id="successMessage">@TempData["ReviewFailMessage"]</p>
+}
+<h2>Film review</h2>
+
+<div class="panel panel-default">
+    <div class="panel-heading">Toevoegen review</div>
+    <div class="panel-body">
+        Kies minimaal één hartje voor uw waardering!
+        @using (Html.BeginForm("AddMovieReview", "Account", FormMethod.Post, new { @Id = "subscribe_form" }))
+        {
+
+            @Html.ValidationSummary()
+            @Html.AntiForgeryToken()
+
+            <div class=" form-group">
+               
+                <label class="control-label col-md-2">Filmkeuze: </label>
+                <div class="col-md-10">
+                    <select class="form-control" name="Movie" id="Movie">
+                        
+                        @foreach (Movie movie in Model.ReviewedMovies)
+                        {
+                            <option value="@movie.MovieID">@movie.Title</option>
+                        }
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-md-2" style="float: left;">Cijfer: </label>
+                <div class="col-md-10" style="align-items: center">
+                    <input type="number" name="Rating" id="Rating" class="rating" data-clearable="" data-icon-lib="fa fa-2x" data-max="5" data-min="1" data-active-icon="fa-heart" data-inactive-icon="fa-heart-o" data-clearable-icon="fa-trash-o" required />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-md-2" style="float: left;">Commentaar: </label>
+                <div class="col-md-10" style="align-items: center">
+                    <textarea rows="4" cols="50" name="review" style="resize:none" placeholder="Commentaar: "></textarea>
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Voeg mijn mening toe!" class="btn btn-success" />
+                </div>
+            </div>
+        }
+    </div>
+</div>

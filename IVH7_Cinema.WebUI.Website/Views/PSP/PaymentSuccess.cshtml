@@ -1,0 +1,18 @@
+﻿@model IVH7_Cinema.Domain.Entities.Order
+
+@{
+    ViewBag.Title = "Betaling succes!";
+}
+<button type="button" class="btn btn-lg btn-danger" onclick="location.href='@Url.Action("Logout", "Account")'">Afmelden</button>
+
+
+<p class="text-center">
+    <br /><h2 style="text-align: center;">Betaling succes!</h2>
+    <br />
+    <h3 style="text-align: center;">De kaarten worden nu geprint.<br /> Klik op de knop hieronder om terug te gaan naar het voorstellingenoverzicht.</h3>
+    <br />
+
+
+
+    <button type="button" id="cancel" class="btn btn-lg btn-success text-left" onclick="location.href='@Url.Action("SellTickets", "Account")';return false;">Naar voorstellingen</button>
+</p>

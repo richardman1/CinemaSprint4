@@ -1,0 +1,57 @@
+﻿@model IEnumerable<MovieReview>
+@using IVH7_Cinema.Domain.Entities
+@{
+    ViewBag.Title = "ReviewsPerMovie";
+}
+@if (TempData["ReviewMessage"] != null)
+{
+    <p class="alert alert-success" id="successMessage">@TempData["ReviewMessage"]</p>
+}
+<h2>Reviews voor de film @ViewBag.MovieTitle</h2>
+ 
+<div class="panel panel-default">
+    <div class="panel-heading">
+   Beoordelingen
+    </div>
+    <div class="panel-body">
+        @if(Model.Count() > 0){
+        <table id="table_id" class="display">
+            <thead>
+                <tr>
+                    <th>Cijfer</th>
+                    <th>Commentaar</th>
+                    </tr>
+            </thead>
+            <tbody>
+               
+                @foreach (MovieReview l in Model)
+                {
+                    <tr>
+                        <td>@l.Rating</td>
+                        <td>@l.Comments</td>
+                    </tr>
+                }
+               
+               
+            </tbody>
+        </table>
+    <button type="button" class="btn btn-lg btn-primary" onclick="location.href='@Url.Action("Movie", "Home", new { MovieID = ViewBag.MovieID})'">Terug naar deze film</button>
+        }
+        else
+        {
+            <h2>Er zijn geen beoordelingen voor deze film!</h2>
+    <button type="button" class="btn btn-lg btn-danger" onclick="location.href='@Url.Action("Movie", "Home", new { MovieID = ViewBag.MovieID})'">Terug naar deze film</button>
+    <button type="button" class="btn btn-lg btn-success" onclick="location.href='@Url.Action("MovieReview", "Account")'" style="float: right;">Voeg zelf een recensie toe!</button>
+        }
+
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        $('#table_id').DataTable();
+    });
+
+    $('#table_id').dataTable({
+        "searching": false
+    });
+</script>

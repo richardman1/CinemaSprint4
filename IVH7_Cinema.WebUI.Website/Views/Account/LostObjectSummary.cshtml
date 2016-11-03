@@ -1,0 +1,97 @@
+﻿@model IVH7_Cinema.Domain.Entities.LostObject
+
+@{
+    ViewBag.Title = "LostObjectSummary";
+}
+<button type="button" class="btn btn-lg btn-danger" onclick="location.href='@Url.Action("Logout", "Account")'">Afmelden</button>
+<h2>Gevonden voorwerpen</h2>
+@if (TempData["ObjectMessage"] != null)
+{
+    <p class="alert alert-success" id="successMessage">@TempData["ObjectMessage"]</p>
+}
+<div>
+    <h4>@Model.Name</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Datum gevonden:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DateTime.Date)
+        </dd>
+
+        <dt>
+            Gevonden plaats:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Foundplace)
+        </dd>
+        <dt>
+            Email eigenaar:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EmailAddress)
+        </dd>
+        <dt></dt>
+        <dd></dd>
+        <dt>
+            Naam vinder:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FinderName)
+        </dd>
+
+        <dt>
+            Adres vinder:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FinderAddress)
+        </dd>
+
+        <dt>
+            Email vinder:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FinderEmail)
+        </dd>
+
+
+
+        <dt>
+            Opgehaald:
+        </dt>
+
+        <dd>
+            @if (Model.PickedUp.Equals(false))
+            {
+                @:Nee
+            }
+            else
+            {
+                @:Ja
+            }
+        </dd>
+
+    </dl>
+
+
+</div>
+
+@if (Model.PickedUp.Equals(false))
+{
+    <button type="button" id="cancel" class="btn btn-lg btn-success" onclick="location.href='@Url.Action("ChangePickedUp", "Account", Model)'">Voorwerp wordt opgehaald</button>
+}
+else
+{
+    <button type="button" id="cancel" class="btn btn-lg btn-default" disabled >Voorwerp is al opgehaald</button>
+}
+<p>
+    @Html.ActionLink("Edit", "EditObject", Model) |
+    <button type="button" class="btn btn-lg btn-danger" onclick="location.href='@Url.Action("Index", "Account")'">Terug naar home</button>
+</p>

@@ -1,0 +1,105 @@
+﻿@model IVH7_Cinema.Domain.Entities.Questionnaire
+
+@{
+    ViewBag.Title = "Questionnaire";
+}
+@if (TempData["QuestionnaireMessage"] != null)
+{
+    <p class="alert alert-success" id="successMessage">@TempData["QuestionnaireMessage"]</p>
+}
+
+@if (TempData["QuestionnaireFailureMessage"] != null)
+{
+    <p class="alert alert-danger" id="successMessage">@TempData["QuestionnaireFailureMessage"]</p>
+}
+<h2>Enquete</h2>
+
+<div class="panel panel-default">
+    <div class="panel-heading">Geef hier uw mening over uw bioscoopervaring</div>
+    <div class="panel-body">
+        Let er alstublieft op dat u bij alle onderdelen minstens één hartje invult anders wordt de enquete niet opgeslagen!
+        @using (Html.BeginForm("QuestionnaireAdd", "Account", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.AntiForgeryToken()
+
+            <div class="form-group">
+                <label class="control-label col-md-2" style="float: left;">Algemene ervaring: </label>
+                <div class="col-md-10" style="align-items: center">
+                    <input type="number" name="GeneralRating" id="GeneralRating" class="rating" data-clearable="" data-icon-lib="fa fa-2x" data-max="5" data-min="1" data-active-icon="fa-heart" data-inactive-icon="fa-heart-o" data-clearable-icon="fa-trash-o" required />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-md-2" style="float: left;">Onze werknemers: </label>
+                <div class="col-md-10" style="align-items: center">
+                    <input type="number" name="EmployeeRating" id="EmployeeRating" class="rating" data-clearable="" data-icon-lib="fa fa-2x" data-max="5" data-min="1" data-active-icon="fa-heart" data-inactive-icon="fa-heart-o" data-clearable-icon="fa-trash-o" required />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-md-2" style="float: left;">Filmaanbod:  </label>
+                <div class="col-md-10" style="align-items: center">
+                    <input type="number" name="FilmsRating" id="FilmsRating" class="rating" data-clearable="" data-icon-lib="fa fa-2x" data-max="5" data-min="1" data-active-icon="fa-heart" data-inactive-icon="fa-heart-o" data-clearable-icon="fa-trash-o" required />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-md-2" style="float: left;">Hygiëne</label>
+                <div class="col-md-10" style="align-items: center">
+                    <input type="number" name="HygieneRating" id="HygieneRating" class="rating" data-clearable="" data-icon-lib="fa fa-2x" data-max="5" data-min="1" data-active-icon="fa-heart" data-inactive-icon="fa-heart-o" data-clearable-icon="fa-trash-o" required />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-md-2" style="float: left;">Filmzalen: </label>
+                <div class="col-md-10" style="align-items: center">
+                    <input type="number" name="ScreenRating" id="ScreenRating" class="rating" data-clearable="" data-icon-lib="fa fa-2x" data-max="5" data-min="1" data-active-icon="fa-heart" data-inactive-icon="fa-heart-o" data-clearable-icon="fa-trash-o" required />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-md-2" style="float: left;">Parkeren: </label>
+                <div class="col-md-10" style="align-items: center">
+                    <input type="number" name="ParkingRating" id="ParkingRating" class="rating" data-clearable="" data-icon-lib="fa fa-2x" data-max="5" data-min="1" data-active-icon="fa-heart" data-inactive-icon="fa-heart-o" data-clearable-icon="fa-trash-o" required />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-md-2" style="float: left;">Onze website:  </label>
+                <div class="col-md-10" style="align-items: center">
+                    <input type="number" name="SiteRating" id="SiteRating" class="rating" data-clearable="" data-icon-lib="fa fa-2x" data-max="5" data-min="1" data-active-icon="fa-heart" data-inactive-icon="fa-heart-o" data-clearable-icon="fa-trash-o" required />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-md-2" style="float: left;">Horeca: </label>
+                <div class="col-md-10" style="align-items: center">
+                    <input type="number" name="FoodRating" id="FoodRating" class="rating" data-clearable="" data-icon-lib="fa fa-2x" data-max="5" data-min="1" data-active-icon="fa-heart" data-inactive-icon="fa-heart-o" data-clearable-icon="fa-trash-o" required />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-md-2" style="float: left;">De prijzen: </label>
+                <div class="col-md-10" style="align-items: center">
+                    <input type="number" name="PriceRating" id="PriceRating" class="rating" data-clearable="" data-icon-lib="fa fa-2x" data-max="5" data-min="1" data-active-icon="fa-heart" data-inactive-icon="fa-heart-o" data-clearable-icon="fa-trash-o" required />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-md-2" style="float: left;">Het gebouw: </label>
+                <div class="col-md-10" style="align-items: center">
+                    <input type="number" name="BuildingRating" id="BuildingRating" class="rating" data-clearable="" data-icon-lib="fa fa-2x" data-max="5" data-min="1" data-active-icon="fa-heart" data-inactive-icon="fa-heart-o" data-clearable-icon="fa-trash-o" required />
+                </div>
+            </div>
+
+
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Voeg mijn mening toe!" class="btn btn-success" />
+                </div>
+            </div>
+        }
+    </div>
+</div>

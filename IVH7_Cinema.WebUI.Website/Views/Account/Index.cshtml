@@ -1,0 +1,35 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Welkom @User.Identity.Name !</h2>
+
+<h3>Kies wat je wilt doen!</h3>
+
+@if (User.IsInRole("kassa"))
+{
+    <button type="button" class="btn btn-lg" onclick="location.href='@Url.Action("SellTickets", "Account")'" style="background-color: deepskyblue; float: left;">Kaarten verkopen</button>
+    <button type="button" class="btn btn-lg" onclick="location.href='@Url.Action("LostAndFound", "Account")'" style="background-color: deepskyblue; float: right;">Gevonden voorwerpen beheren</button><br /><br /><br />
+}
+
+@if (User.IsInRole("back-office"))
+{
+    <button type="button" class="btn btn-lg" onclick="location.href='@Url.Action("AddMovie", "Account")'" style="background-color: blueviolet; float: left;">Film toevoegen</button>
+    <button type="button" class="btn btn-lg" onclick="location.href='@Url.Action("SendNewsletter", "Account")'" style="background-color: blueviolet; float: right;">Nieuwsbrief verzenden</button><br /><br /><br />
+}
+
+@if (User.IsInRole("manager"))
+{
+    <button type="button" class="btn btn-lg" onclick="location.href='@Url.Action("QuestionnaireResults", "Account")'" style="background-color: gold; text-align: center;">Enquete resultaten bekijken</button><br /><br />
+}
+
+
+
+
+@if (User.IsInRole("superadmin"))
+{
+
+    <button type="button" class="btn btn-lg" onclick="location.href='@Url.Action("Register", "Account")'" style="background-color: silver; text-align: center;">Gebruikers toevoegen</button>
+
+}
